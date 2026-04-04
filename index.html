@@ -23,8 +23,8 @@
       </div>
 
       <div class="top-actions">
-        <a class="btn btn-soft" href="#">Cenniki</a>
-        <a class="btn btn-soft" href="#">Wykresy</a>
+        <a class="btn btn-soft" href="cenniki.html">Cenniki</a>
+        <a class="btn btn-soft" href="wykresy.html">Wykresy</a>
         <a class="btn btn-primary" href="#">Premium</a>
       </div>
     </div>
@@ -32,13 +32,11 @@
 
   <main class="wrap">
 
-    <section class="hero">
+    <section class="hero hero-full">
       <div class="hero-main">
         <div class="hero-kicker">DZIŚ NA RYNKU</div>
-        <h1 class="hero-title" id="heroTitle">Komentarz dnia</h1>
-        <p class="hero-lead" id="heroLead">
-          Najważniejsze informacje z rynku w jednym miejscu.
-        </p>
+        <h1 class="hero-title" id="heroTitle">Co dziś dzieje się na rynku zbóż, rzepaku i pasz?</h1>
+        <p class="hero-lead" id="heroLead">Najważniejsze informacje z rynku w jednym miejscu.</p>
 
         <div class="hero-meta">
           <div class="meta-pill" id="metaDate">Aktualizacja: --</div>
@@ -46,31 +44,11 @@
           <div class="meta-pill">Część darmowa</div>
         </div>
       </div>
-
-      <aside class="hero-side">
-        <div>
-          <h2 class="side-title">Codzienny skrót rynku</h2>
-          <p class="side-copy">
-            Prosty, szybki i praktyczny obraz rynku dla rolnika: komentarz dnia, ceny i wykresy najważniejszych upraw.
-          </p>
-        </div>
-
-        <div class="premium-box">
-          <div class="label">Premium ACE</div>
-          <h3>Pełna analiza tygodniowa i strategie sprzedaży</h3>
-          <p>
-            Wersja płatna może zawierać pełne wnioski, scenariusze cenowe, szersze komentarze i dodatkowe materiały.
-          </p>
-          <a href="#" class="btn btn-primary">Zobacz wersję premium</a>
-        </div>
-      </aside>
     </section>
 
     <section class="layout">
 
-      <!-- LEWA KOLUMNA -->
       <aside class="left-col section-stack">
-
         <div class="panel">
           <div class="panel-head">
             <div>
@@ -80,20 +58,23 @@
           </div>
           <div class="panel-body">
             <div class="quote-section">
-              <div class="quote-section-title">Surowce w Polsce</div>
+              <div class="quote-section-title">Ceny PL</div>
               <div class="quote-table" id="polandList"></div>
             </div>
 
             <div class="quote-section">
-              <div class="quote-section-title">Zamknięcie giełdowe</div>
+              <div class="quote-section-title">Ceny giełdowe</div>
               <div class="quote-table" id="globalList"></div>
+            </div>
+
+            <div class="quote-section">
+              <div class="quote-section-title">FX</div>
+              <div class="quote-table" id="fxList"></div>
             </div>
           </div>
         </div>
-
       </aside>
 
-      <!-- ŚRODEK -->
       <section class="center-col">
         <article class="panel article">
           <div class="panel-head">
@@ -121,16 +102,13 @@
           <div class="footer-premium">
             <div>
               <h3>Dalsza część analizy w wersji premium</h3>
-              <p>
-                Tu można później zrobić odcięcie do pełnego materiału premium.
-              </p>
+              <p>Tu można później zrobić odcięcie do pełnego materiału premium.</p>
             </div>
             <a href="#" class="btn btn-primary">Odblokuj pełny materiał</a>
           </div>
         </article>
       </section>
 
-      <!-- PRAWA KOLUMNA -->
       <aside class="right-col section-stack">
         <div class="panel">
           <div class="panel-head">
@@ -143,21 +121,21 @@
           <div class="panel-body section-stack">
             <div class="chart-card">
               <h3 class="chart-title">Pszenica</h3>
-              <button class="chart-open" data-title="Pszenica" data-src="assets/charts/pszenica.png">
+              <button type="button" class="chart-open" data-title="Pszenica" data-src="assets/charts/pszenica.png">
                 <img src="assets/charts/pszenica.png" alt="Wykres pszenicy" class="chart-image">
               </button>
             </div>
 
             <div class="chart-card">
               <h3 class="chart-title">Kukurydza</h3>
-              <button class="chart-open" data-title="Kukurydza" data-src="assets/charts/kukurydza.png">
+              <button type="button" class="chart-open" data-title="Kukurydza" data-src="assets/charts/kukurydza.png">
                 <img src="assets/charts/kukurydza.png" alt="Wykres kukurydzy" class="chart-image">
               </button>
             </div>
 
             <div class="chart-card">
               <h3 class="chart-title">Rzepak</h3>
-              <button class="chart-open" data-title="Rzepak" data-src="assets/charts/rzepak.png">
+              <button type="button" class="chart-open" data-title="Rzepak" data-src="assets/charts/rzepak.png">
                 <img src="assets/charts/rzepak.png" alt="Wykres rzepaku" class="chart-image">
               </button>
             </div>
@@ -168,13 +146,12 @@
     </section>
   </main>
 
-  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
     <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
       <div class="lightbox-top">
         <h3 id="lightboxTitle">Wykres</h3>
-        <button class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
       </div>
       <div class="lightbox-body">
         <img id="lightboxImage" src="" alt="Powiększony wykres">
