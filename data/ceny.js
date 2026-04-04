@@ -1,7 +1,6 @@
 window.ACE_CENY = {
-  title: "Ceny na wczorajsze zamknięcie",
-  dateLabel: "Stan na: 03.04.2026",
-  items: [
+  dateTitle: "Ceny: 03.04.2026",
+  poland: [
     {
       name: "Pszenica konsumpcyjna",
       market: "Polska",
@@ -22,7 +21,9 @@ window.ACE_CENY = {
       value: "2 164 zł/t",
       week: "+35 zł/t",
       month: "+92 zł/t"
-    },
+    }
+  ],
+  global: [
     {
       name: "MATIF Pszenica",
       market: "Euronext",
@@ -36,6 +37,20 @@ window.ACE_CENY = {
       value: "482,25 €/t",
       week: "-4,00 €/t",
       month: "+11,75 €/t"
+    },
+    {
+      name: "EUR/PLN",
+      market: "FX",
+      value: "4,3120",
+      week: "+0,0240",
+      month: "+0,0510"
+    },
+    {
+      name: "USD/PLN",
+      market: "FX",
+      value: "3,9785",
+      week: "-0,0135",
+      month: "+0,0820"
     }
   ]
 };
