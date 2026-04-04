@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analizy ACE | farmer.pl</title>
+  <meta name="description" content="Codzienna analiza rynku dla rolników i hodowców. Komentarz dnia, ceny i wykresy od ACE." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logos">
+          <img src="assets/img/logo-farmer.png" alt="farmer.pl" class="logo farmer-logo">
+          <span class="brand-x">×</span>
+          <img src="assets/img/logo-ace.png" alt="ACE" class="logo ace-logo">
+        </div>
+        <div class="brand-copy">
+          <div class="eyebrow">Strefa analiz rynkowych</div>
+          <div class="title">Codzienna analiza rynku dla rolnika</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn btn-soft" href="#">Cenniki</a>
+        <a class="btn btn-soft" href="#">Wykresy</a>
+        <a class="btn btn-primary" href="#">Premium</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="hero-kicker">DZIŚ NA RYNKU</div>
+        <h1 class="hero-title" id="heroTitle">Komentarz dnia</h1>
+        <p class="hero-lead" id="heroLead">
+          Najważniejsze informacje z rynku w jednym miejscu.
+        </p>
+
+        <div class="hero-meta">
+          <div class="meta-pill" id="metaDate">Aktualizacja: --</div>
+          <div class="meta-pill">Autor: Agri Commodity Experts</div>
+          <div class="meta-pill">Część darmowa</div>
+        </div>
+      </div>
+
+      <aside class="hero-side">
+        <div>
+          <h2 class="side-title">Codzienny skrót rynku</h2>
+          <p class="side-copy">
+            Prosty, szybki i praktyczny obraz rynku dla rolnika: komentarz dnia, ceny i wykresy najważniejszych upraw.
+          </p>
+        </div>
+
+        <div class="premium-box">
+          <div class="label">Premium ACE</div>
+          <h3>Pełna analiza tygodniowa i strategie sprzedaży</h3>
+          <p>
+            Wersja płatna może zawierać pełne wnioski, scenariusze cenowe, szersze komentarze i dodatkowe materiały.
+          </p>
+          <a href="#" class="btn btn-primary">Zobacz wersję premium</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="layout">
+
+      <!-- LEWA KOLUMNA -->
+      <aside class="left-col section-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title" id="pricesTitle">Ceny na wczorajsze zamknięcie</h2>
+              <p class="panel-sub" id="pricesDate">Stan na: --</p>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div class="price-list" id="priceList"></div>
+
+            <div class="mini-note">
+              Docelowo tutaj możesz utrzymać układ bardzo zbliżony do obecnego panelu:
+              cena + zmiana tygodniowa + zmiana miesięczna.
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ŚRODEK -->
+      <section class="center-col">
+        <article class="panel article">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Komentarz dnia</h2>
+              <p class="panel-sub">Najważniejsze na dziś</p>
+            </div>
+            <div class="meta-pill">Darmowy dostęp</div>
+          </div>
+
+          <div class="article-body">
+            <div class="article-leadbox">
+              <h3 id="introTitle">Najważniejsze na dziś</h3>
+              <p id="introText"></p>
+            </div>
+
+            <div id="mainComment"></div>
+
+            <div class="what-means">
+              <h3>Co to oznacza dla rolnika?</h3>
+              <p id="farmerConclusion"></p>
+            </div>
+          </div>
+
+          <div class="footer-premium">
+            <div>
+              <h3>Dalsza część analizy w wersji premium</h3>
+              <p>
+                Tu można później zrobić odcięcie do pełnego materiału premium.
+              </p>
+            </div>
+            <a href="#" class="btn btn-primary">Odblokuj pełny materiał</a>
+          </div>
+        </article>
+      </section>
+
+      <!-- PRAWA KOLUMNA -->
+      <aside class="right-col section-stack">
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h2 class="panel-title">Wykresy</h2>
+              <p class="panel-sub">Najważniejsze rynki na dziś</p>
+            </div>
+          </div>
+
+          <div class="panel-body section-stack">
+            <div class="chart-card">
+              <h3 class="chart-title">Pszenica</h3>
+              <img src="assets/charts/pszenica.png" alt="Wykres pszenicy" class="chart-image">
+            </div>
+
+            <div class="chart-card">
+              <h3 class="chart-title">Kukurydza</h3>
+              <img src="assets/charts/kukurydza.png" alt="Wykres kukurydzy" class="chart-image">
+            </div>
+
+            <div class="chart-card">
+              <h3 class="chart-title">Rzepak</h3>
+              <img src="assets/charts/rzepak.png" alt="Wykres rzepaku" class="chart-image">
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <script src="data/komentarz.js"></script>
+  <script src="data/ceny.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
