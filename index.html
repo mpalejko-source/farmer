@@ -70,22 +70,27 @@
 
       <!-- LEWA KOLUMNA -->
       <aside class="left-col section-stack">
+
         <div class="panel">
           <div class="panel-head">
             <div>
-              <h2 class="panel-title" id="pricesTitle">Ceny na wczorajsze zamknięcie</h2>
-              <p class="panel-sub" id="pricesDate">Stan na: --</p>
+              <h2 class="panel-title" id="pricesDateTitle">Ceny: --</h2>
+              <p class="panel-sub">Najważniejsze poziomy i zmiany</p>
             </div>
           </div>
           <div class="panel-body">
-            <div class="price-list" id="priceList"></div>
+            <div class="quote-section">
+              <div class="quote-section-title">Surowce w Polsce</div>
+              <div class="quote-table" id="polandList"></div>
+            </div>
 
-            <div class="mini-note">
-              Docelowo tutaj możesz utrzymać układ bardzo zbliżony do obecnego panelu:
-              cena + zmiana tygodniowa + zmiana miesięczna.
+            <div class="quote-section">
+              <div class="quote-section-title">Zamknięcie giełdowe</div>
+              <div class="quote-table" id="globalList"></div>
             </div>
           </div>
         </div>
+
       </aside>
 
       <!-- ŚRODEK -->
@@ -131,24 +136,30 @@
           <div class="panel-head">
             <div>
               <h2 class="panel-title">Wykresy</h2>
-              <p class="panel-sub">Najważniejsze rynki na dziś</p>
+              <p class="panel-sub">Kliknij, aby powiększyć</p>
             </div>
           </div>
 
           <div class="panel-body section-stack">
             <div class="chart-card">
               <h3 class="chart-title">Pszenica</h3>
-              <img src="assets/charts/pszenica.png" alt="Wykres pszenicy" class="chart-image">
+              <button class="chart-open" data-title="Pszenica" data-src="assets/charts/pszenica.png">
+                <img src="assets/charts/pszenica.png" alt="Wykres pszenicy" class="chart-image">
+              </button>
             </div>
 
             <div class="chart-card">
               <h3 class="chart-title">Kukurydza</h3>
-              <img src="assets/charts/kukurydza.png" alt="Wykres kukurydzy" class="chart-image">
+              <button class="chart-open" data-title="Kukurydza" data-src="assets/charts/kukurydza.png">
+                <img src="assets/charts/kukurydza.png" alt="Wykres kukurydzy" class="chart-image">
+              </button>
             </div>
 
             <div class="chart-card">
               <h3 class="chart-title">Rzepak</h3>
-              <img src="assets/charts/rzepak.png" alt="Wykres rzepaku" class="chart-image">
+              <button class="chart-open" data-title="Rzepak" data-src="assets/charts/rzepak.png">
+                <img src="assets/charts/rzepak.png" alt="Wykres rzepaku" class="chart-image">
+              </button>
             </div>
           </div>
         </div>
@@ -156,6 +167,20 @@
 
     </section>
   </main>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <div class="lightbox-top">
+        <h3 id="lightboxTitle">Wykres</h3>
+        <button class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
+      </div>
+      <div class="lightbox-body">
+        <img id="lightboxImage" src="" alt="Powiększony wykres">
+      </div>
+    </div>
+  </div>
 
   <script src="data/komentarz.js"></script>
   <script src="data/ceny.js"></script>
