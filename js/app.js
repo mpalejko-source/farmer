@@ -1,58 +1,91 @@
-(function () {
-  const k = window.ACE_KOMENTARZ || {};
-  const c = window.ACE_CENY || {};
+document.addEventListener("DOMContentLoaded", function () {
+  const komentarz = window.ACE_KOMENTARZ || {};
+  const ceny = window.ACE_CENY || {};
 
-  const setText = (id, value) => {
+  function setText(id, value) {
     const el = document.getElementById(id);
-    if (el && value !== undefined) el.textContent = value;
-  };
+    if (el) el.textContent = value || "";
+  }
 
-  setText("heroTitle", k.heroTitle);
-  setText("heroLead", k.heroLead);
-  setText("metaDate", "Aktualizacja: " + (k.aktualizacja || "--"));
-  setText("introTitle", k.introTitle);
-  setText("introText", k.introText);
-  setText("farmerConclusion", k.farmerConclusion);
-  setText("pricesDateTitle", c.dateTitle || "Ceny: --");
+  setText("heroTitle", komentarz.heroTitle);
+  setText("heroLead", komentarz.heroLead);
+  setText("metaDate", "Aktualizacja: " + (komentarz.aktualizacja || "--"));
+  setText("introTitle", komentarz.introTitle);
+  setText("introText", komentarz.introText);
+  setText("farmerConclusion", komentarz.farmerConclusion);
+  setText("pricesDateTitle", ceny.dateTitle || "Ceny: --");
 
   const mainComment = document.getElementById("mainComment");
-  if (mainComment && Array.isArray(k.paragraphs)) {
-    mainComment.innerHTML = k.paragraphs.map(p => `<p>${p}</p>`).join("");
+  if (mainComment && Array.isArray(komentarz.paragraphs)) {
+    mainComment.innerHTML = "";
+    komentarz.paragraphs.forEach(function (txt) {
+      const p = document.createElement("p");
+      p.textContent = txt;
+      mainComment.appendChild(p);
+    });
   }
 
-  renderQuotes("polandList", c.poland || []);
-  renderQuotes("globalList", c.global || []);
+  renderQuotes("polandList", ceny.poland || []);
+  renderQuotes("globalList", ceny.global || []);
+  renderQuotes("fxList", ceny.fx || []);
 
-  function renderQuotes(targetId, items) {
-    const target = document.getElementById(targetId);
-    if (!target) return;
+  initLightbox();
+});
 
-    target.innerHTML = items.map(item => `
-      <div class="quote-row">
-        <div class="quote-left">
-          <div class="quote-name">${item.name}</div>
-          <div class="quote-market">${item.market}</div>
-        </div>
-        <div class="quote-right">
-          <div class="quote-value">${item.value}</div>
-          <div class="quote-changes">
-            <span class="chg ${getChangeClass(item.week)}">Tydz: ${item.week}</span>
-            <span class="chg ${getChangeClass(item.month)}">Mies: ${item.month}</span>
-          </div>
+function renderQuotes(targetId, items) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  target.innerHTML = "";
+
+  items.forEach(function (item) {
+    const row = document.createElement("div");
+    row.className = "quote-row";
+
+    row.innerHTML = `
+      <div class="quote-left">
+        <div class="quote-name">${item.name || ""}</div>
+        <div class="quote-market">${item.market || ""}</div>
+      </div>
+      <div class="quote-right">
+        <div class="quote-value">${item.value || ""}</div>
+        <div class="quote-changes badges-two-line">
+          ${renderBadge("T", item.week)}
+          ${renderBadge("M", item.month)}
         </div>
       </div>
-    `).join("");
-  }
+    `;
 
-  function getChangeClass(value) {
-    if (!value) return "flat";
-    const trimmed = String(value).trim();
-    if (trimmed.startsWith("+")) return "up";
-    if (trimmed.startsWith("-")) return "down";
-    return "flat";
-  }
+    target.appendChild(row);
+  });
+}
 
-  // Lightbox wykresów
+function renderBadge(label, value) {
+  const cls = getChangeClass(value);
+  const arrow = getArrow(value);
+  return `<span class="delta-badge ${cls}" title="${value || "-"}">
+    <span class="delta-arrow">${arrow}</span>
+    <span class="delta-label">${label}</span>
+  </span>`;
+}
+
+function getChangeClass(value) {
+  if (!value) return "flat";
+  const t = String(value).trim();
+  if (t.startsWith("+")) return "up";
+  if (t.startsWith("-")) return "down";
+  return "flat";
+}
+
+function getArrow(value) {
+  if (!value) return "→";
+  const t = String(value).trim();
+  if (t.startsWith("+")) return "▲";
+  if (t.startsWith("-")) return "▼";
+  return "→";
+}
+
+function initLightbox() {
   const lightbox = document.getElementById("lightbox");
   const lightboxTitle = document.getElementById("lightboxTitle");
   const lightboxImage = document.getElementById("lightboxImage");
@@ -60,37 +93,33 @@
   const lightboxBackdrop = document.getElementById("lightboxBackdrop");
   const chartButtons = document.querySelectorAll(".chart-open");
 
-  chartButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const src = btn.getAttribute("data-src");
-      const title = btn.getAttribute("data-title") || "Wykres";
-      openLightbox(src, title);
-    });
-  });
-
   function openLightbox(src, title) {
-    if (!lightbox || !lightboxImage || !lightboxTitle) return;
+    if (!lightbox) return;
     lightboxImage.src = src;
-    lightboxTitle.textContent = title;
+    lightboxTitle.textContent = title || "Wykres";
     lightbox.classList.add("is-open");
-    lightbox.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
   }
 
   function closeLightbox() {
-    if (!lightbox || !lightboxImage) return;
+    if (!lightbox) return;
     lightbox.classList.remove("is-open");
-    lightbox.setAttribute("aria-hidden", "true");
     lightboxImage.src = "";
     document.body.style.overflow = "";
   }
 
+  chartButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      openLightbox(btn.getAttribute("data-src"), btn.getAttribute("data-title"));
+    });
+  });
+
   if (lightboxClose) lightboxClose.addEventListener("click", closeLightbox);
   if (lightboxBackdrop) lightboxBackdrop.addEventListener("click", closeLightbox);
 
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && lightbox && lightbox.classList.contains("is-open")) {
       closeLightbox();
     }
   });
-})();
+}
