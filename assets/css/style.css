@@ -498,6 +498,125 @@ img{max-width:100%;display:block}
   background:#fff;
 }
 
+.hero-full{
+  display:block;
+}
+.hero-full .hero-main{
+  width:100%;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:340px minmax(0,1fr) 320px;
+  gap:18px;
+  align-items:start;
+}
+
+.three-col-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.charts-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.quote-table{
+  display:block;
+}
+
+.quote-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:14px;
+  padding:12px 14px;
+  border-bottom:1px solid #e7eef6;
+  align-items:center;
+}
+
+.quote-changes.badges-two-line{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+
+.delta-badge{
+  min-width:40px;
+  height:28px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+  padding:0 8px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  line-height:1;
+  white-space:nowrap;
+}
+
+.delta-badge.up{
+  background:rgba(31,143,78,.12);
+  color:var(--green);
+}
+
+.delta-badge.down{
+  background:rgba(201,71,71,.12);
+  color:var(--red);
+}
+
+.delta-badge.flat{
+  background:#eef2f7;
+  color:#5f6f80;
+}
+
+.delta-arrow{
+  font-size:11px;
+  transform:translateY(-.5px);
+}
+
+.delta-label{
+  font-size:10px;
+  letter-spacing:.03em;
+}
+
+.chart-card-large .chart-image{
+  min-height:260px;
+  object-fit:contain;
+}
+
+@media (max-width:1180px){
+  .layout{
+    grid-template-columns:320px minmax(0,1fr);
+  }
+  .right-col{
+    grid-column:1 / -1;
+  }
+  .three-col-grid{
+    grid-template-columns:1fr;
+  }
+  .charts-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width:640px){
+  .quote-row{
+    grid-template-columns:1fr;
+  }
+  .quote-right{
+    text-align:left;
+  }
+  .quote-changes.badges-two-line{
+    justify-content:flex-start;
+  }
+}
+
 @media (max-width:1180px){
   .layout{grid-template-columns:320px minmax(0,1fr)}
   .right-col{grid-column:1 / -1}
