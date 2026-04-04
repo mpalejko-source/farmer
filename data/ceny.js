@@ -21,6 +21,20 @@ window.ACE_CENY = {
       value: "2 164 zł/t",
       week: "+35 zł/t",
       month: "+92 zł/t"
+    },
+    {
+      name: "Śruta sojowa",
+      market: "PL port Gdynia",
+      value: "1 865 zł/t",
+      week: "-15 zł/t",
+      month: "-42 zł/t"
+    },
+    {
+      name: "Śruta rzepakowa",
+      market: "PL centralna Polska",
+      value: "1 185 zł/t",
+      week: "+5 zł/t",
+      month: "+24 zł/t"
     }
   ],
   global: [
@@ -38,6 +52,15 @@ window.ACE_CENY = {
       week: "-4,00 €/t",
       month: "+11,75 €/t"
     },
+    {
+      name: "CBOT Kukurydza",
+      market: "Chicago",
+      value: "452,25 c/bu",
+      week: "+8,50 c/bu",
+      month: "+21,00 c/bu"
+    }
+  ],
+  fx: [
     {
       name: "EUR/PLN",
       market: "FX",
