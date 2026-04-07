@@ -1,77 +1,76 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const charts = window.ACE_WYKRESY || [];
-  const grid = document.getElementById("chartsGrid");
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wykresy | Analizy ACE</title>
+  <meta name="description" content="Rozszerzony widok wykresów rynkowych od ACE dla użytkowników farmer.pl." />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
 
-  if (grid) {
-    grid.innerHTML = charts.map(function(item) {
-      return `
-        <div class="panel">
-          <div class="panel-body">
-            <div class="chart-card chart-card-large">
-              <h3 class="chart-title">${escapeHtml(item.title)}</h3>
-              <button type="button" class="chart-open" data-title="${escapeHtml(item.title)}" data-src="${escapeHtml(item.src)}">
-                <img src="${escapeHtml(item.src)}" alt="${escapeHtml(item.title)}" class="chart-image">
-              </button>
-            </div>
-          </div>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-logos">
+          <img src="assets/img/logo-farmer.png" alt="farmer.pl" class="logo farmer-logo">
+          <span class="brand-x">×</span>
+          <img src="assets/img/logo-ace.png" alt="ACE" class="logo ace-logo">
         </div>
-      `;
-    }).join("");
-  }
+        <div class="brand-copy">
+          <div class="eyebrow">Strefa analiz rynkowych</div>
+          <div class="title">Wykresy rynkowe</div>
+        </div>
+      </div>
 
-  initLightbox();
-});
+      <div class="top-actions">
+        <a class="btn btn-soft" href="index.html">Strona główna</a>
+        <a class="btn btn-soft" href="cenniki.html">Cenniki</a>
+        <a class="btn btn-primary" href="#">Premium</a>
+      </div>
+    </div>
+  </header>
 
-function initLightbox() {
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-  const lightboxTitle = document.getElementById("lightboxTitle");
-  const lightboxClose = document.getElementById("lightboxClose");
-  const lightboxBackdrop = document.getElementById("lightboxBackdrop");
-  const buttons = document.querySelectorAll(".chart-open");
+  <main class="wrap">
 
-  if (!lightbox || !lightboxImage || !lightboxTitle) return;
+    <section class="hero hero-full">
+      <div class="hero-main">
+        <div class="hero-kicker">WYKRESY</div>
+        <h1 class="hero-title">Rozszerzony widok wykresów rynkowych</h1>
+        <p class="hero-lead">
+          Na stronie głównej pokazujesz tylko trzy najważniejsze wykresy. Tutaj możesz dodać pełniejszy zestaw:
+          główne rynki, sezonowość, waluty, śruty i inne wykresy pomocnicze.
+        </p>
 
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const src = button.getAttribute("data-src");
-      const title = button.getAttribute("data-title") || "Wykres";
+        <div class="hero-meta">
+          <div class="meta-pill">Źródło: ACE</div>
+          <div class="meta-pill">Kliknij wykres, aby powiększyć</div>
+        </div>
+      </div>
+    </section>
 
-      lightboxImage.src = src || "";
-      lightboxTitle.textContent = title;
-      lightbox.classList.add("is-open");
-      lightbox.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    });
-  });
+    <section class="charts-grid" id="chartsGrid">
+      <!-- Wykresy będą generowane z data/wykresy.js -->
+    </section>
 
-  function closeLightbox() {
-    lightbox.classList.remove("is-open");
-    lightbox.setAttribute("aria-hidden", "true");
-    lightboxImage.src = "";
-    document.body.style.overflow = "";
-  }
+  </main>
 
-  if (lightboxClose) {
-    lightboxClose.addEventListener("click", closeLightbox);
-  }
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
 
-  if (lightboxBackdrop) {
-    lightboxBackdrop.addEventListener("click", closeLightbox);
-  }
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
+      <div class="lightbox-top">
+        <h3 id="lightboxTitle">Wykres</h3>
+        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
+      </div>
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
-      closeLightbox();
-    }
-  });
-}
+      <div class="lightbox-body">
+        <img id="lightboxImage" src="" alt="Powiększony wykres">
+      </div>
+    </div>
+  </div>
 
-function escapeHtml(value) {
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+  <script src="data/wykresy.js"></script>
+  <script src="js/wykresy.js"></script>
+</body>
+</html>
