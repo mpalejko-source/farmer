@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -32,11 +33,14 @@
 
   <main class="wrap">
 
+    <!-- HERO -->
     <section class="hero hero-full">
       <div class="hero-main">
         <div class="hero-kicker">DZIŚ NA RYNKU</div>
         <h1 class="hero-title" id="heroTitle">Co dziś dzieje się na rynku zbóż, rzepaku i pasz?</h1>
-        <p class="hero-lead" id="heroLead">Najważniejsze informacje z rynku w jednym miejscu.</p>
+        <p class="hero-lead" id="heroLead">
+          Najważniejsze informacje z rynku w jednym miejscu: komentarz dnia, prosty obraz sytuacji i najważniejsze sygnały dla rolnika.
+        </p>
 
         <div class="hero-meta">
           <div class="meta-pill" id="metaDate">Aktualizacja: --</div>
@@ -46,8 +50,10 @@
       </div>
     </section>
 
+    <!-- MAIN LAYOUT -->
     <section class="layout">
 
+      <!-- LEFT COLUMN -->
       <aside class="left-col section-stack">
         <div class="panel">
           <div class="panel-head">
@@ -56,6 +62,7 @@
               <p class="panel-sub">Najważniejsze poziomy i zmiany</p>
             </div>
           </div>
+
           <div class="panel-body">
             <div class="quote-section">
               <div class="quote-section-title">Ceny PL</div>
@@ -75,6 +82,7 @@
         </div>
       </aside>
 
+      <!-- CENTER COLUMN -->
       <section class="center-col">
         <article class="panel article">
           <div class="panel-head">
@@ -102,13 +110,17 @@
           <div class="footer-premium">
             <div>
               <h3>Dalsza część analizy w wersji premium</h3>
-              <p>Tu można później zrobić odcięcie do pełnego materiału premium.</p>
+              <p>
+                Tu możesz później wprowadzić naturalne odcięcie do pełnego materiału premium:
+                pełne wnioski, szersze wykresy, scenariusze cenowe i strategie sprzedaży.
+              </p>
             </div>
             <a href="#" class="btn btn-primary">Odblokuj pełny materiał</a>
           </div>
         </article>
       </section>
 
+      <!-- RIGHT COLUMN -->
       <aside class="right-col section-stack">
         <div class="panel">
           <div class="panel-head">
@@ -144,15 +156,19 @@
       </aside>
 
     </section>
+
   </main>
 
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+
     <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
       <div class="lightbox-top">
         <h3 id="lightboxTitle">Wykres</h3>
         <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
       </div>
+
       <div class="lightbox-body">
         <img id="lightboxImage" src="" alt="Powiększony wykres">
       </div>
