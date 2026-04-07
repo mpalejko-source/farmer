@@ -87,38 +87,58 @@ function renderQuotes(targetId, items) {
 }
 
 function renderBadge(label, value) {
-  const cls = getChangeClass(value);
-  const arrow = getArrow(value);
-  const safeValue = escapeHtml(value || "-");
+  const parsed = parseChange(value);
+  const safeFullValue = escapeHtml(value || "-");
 
   return `
-    <span class="delta-badge ${cls}" title="${safeValue}">
-      <span class="delta-arrow">${arrow}</span>
+    <span class="delta-badge ${parsed.cls}" title="${safeFullValue}">
+      <span class="delta-arrow">${parsed.arrow}</span>
       <span class="delta-label">${label}</span>
+      <span class="delta-value">${escapeHtml(parsed.display)}</span>
     </span>
   `;
 }
 
-function getChangeClass(value) {
-  if (!value) return "flat";
+function parseChange(value) {
+  if (value === null || value === undefined || String(value).trim() === "") {
+    return {
+      cls: "flat",
+      arrow: "→",
+      display: "-"
+    };
+  }
 
   const text = String(value).trim();
 
-  if (text.startsWith("+")) return "up";
-  if (text.startsWith("-")) return "down";
+  if (text.startsWith("+")) {
+    return {
+      cls: "up",
+      arrow: "▲",
+      display: text
+    };
+  }
 
-  return "flat";
-}
+  if (text.startsWith("-")) {
+    return {
+      cls: "down",
+      arrow: "▼",
+      display: text
+    };
+  }
 
-function getArrow(value) {
-  if (!value) return "→";
+  if (text === "0" || text === "0,0" || text === "0.0" || text.toLowerCase() === "flat") {
+    return {
+      cls: "flat",
+      arrow: "→",
+      display: text === "flat" ? "0" : text
+    };
+  }
 
-  const text = String(value).trim();
-
-  if (text.startsWith("+")) return "▲";
-  if (text.startsWith("-")) return "▼";
-
-  return "→";
+  return {
+    cls: "flat",
+    arrow: "→",
+    display: text
+  };
 }
 
 function initLightbox() {
