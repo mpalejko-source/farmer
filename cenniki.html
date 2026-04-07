@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Analizy ACE | farmer.pl</title>
-  <meta name="description" content="Codzienna analiza rynku dla rolników i hodowców. Komentarz dnia, ceny i wykresy od ACE." />
+  <title>Cenniki | Analizy ACE</title>
+  <meta name="description" content="Rozszerzone cenniki rynkowe od ACE dla użytkowników farmer.pl." />
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
   <header class="topbar">
     <div class="topbar-inner">
       <div class="brand">
@@ -18,12 +19,12 @@
         </div>
         <div class="brand-copy">
           <div class="eyebrow">Strefa analiz rynkowych</div>
-          <div class="title">Codzienna analiza rynku dla rolnika</div>
+          <div class="title">Rozszerzone cenniki</div>
         </div>
       </div>
 
       <div class="top-actions">
-        <a class="btn btn-soft" href="cenniki.html">Cenniki</a>
+        <a class="btn btn-soft" href="index.html">Strona główna</a>
         <a class="btn btn-soft" href="wykresy.html">Wykresy</a>
         <a class="btn btn-primary" href="#">Premium</a>
       </div>
@@ -34,133 +35,62 @@
 
     <section class="hero hero-full">
       <div class="hero-main">
-        <div class="hero-kicker">DZIŚ NA RYNKU</div>
-        <h1 class="hero-title" id="heroTitle">Co dziś dzieje się na rynku zbóż, rzepaku i pasz?</h1>
-        <p class="hero-lead" id="heroLead">Najważniejsze informacje z rynku w jednym miejscu.</p>
+        <div class="hero-kicker">CENNIKI</div>
+        <h1 class="hero-title">Rozszerzony widok cen rynkowych</h1>
+        <p class="hero-lead">
+          Na stronie głównej pokazujesz skróconą wersję najważniejszych cen. Tutaj możesz umieścić pełniejszy zestaw:
+          ceny krajowe, ceny giełdowe oraz rynek walutowy.
+        </p>
 
         <div class="hero-meta">
-          <div class="meta-pill" id="metaDate">Aktualizacja: --</div>
-          <div class="meta-pill">Autor: Agri Commodity Experts</div>
-          <div class="meta-pill">Część darmowa</div>
+          <div class="meta-pill" id="cennikiDateTitle">Ceny: --</div>
+          <div class="meta-pill">Źródło: ACE</div>
+          <div class="meta-pill">Widok rozszerzony</div>
         </div>
       </div>
     </section>
 
-    <section class="layout">
-
-      <aside class="left-col section-stack">
-        <div class="panel">
-          <div class="panel-head">
-            <div>
-              <h2 class="panel-title" id="pricesDateTitle">Ceny: --</h2>
-              <p class="panel-sub">Najważniejsze poziomy i zmiany</p>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="quote-section">
-              <div class="quote-section-title">Ceny PL</div>
-              <div class="quote-table" id="polandList"></div>
-            </div>
-
-            <div class="quote-section">
-              <div class="quote-section-title">Ceny giełdowe</div>
-              <div class="quote-table" id="globalList"></div>
-            </div>
-
-            <div class="quote-section">
-              <div class="quote-section-title">FX</div>
-              <div class="quote-table" id="fxList"></div>
-            </div>
+    <section class="three-col-grid">
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Ceny PL</h2>
+            <p class="panel-sub">Rynek krajowy</p>
           </div>
         </div>
-      </aside>
+        <div class="panel-body">
+          <div class="quote-table" id="cennikiPoland"></div>
+        </div>
+      </div>
 
-      <section class="center-col">
-        <article class="panel article">
-          <div class="panel-head">
-            <div>
-              <h2 class="panel-title">Komentarz dnia</h2>
-              <p class="panel-sub">Najważniejsze na dziś</p>
-            </div>
-            <div class="meta-pill">Darmowy dostęp</div>
-          </div>
-
-          <div class="article-body">
-            <div class="article-leadbox">
-              <h3 id="introTitle">Najważniejsze na dziś</h3>
-              <p id="introText"></p>
-            </div>
-
-            <div id="mainComment"></div>
-
-            <div class="what-means">
-              <h3>Co to oznacza dla rolnika?</h3>
-              <p id="farmerConclusion"></p>
-            </div>
-          </div>
-
-          <div class="footer-premium">
-            <div>
-              <h3>Dalsza część analizy w wersji premium</h3>
-              <p>Tu można później zrobić odcięcie do pełnego materiału premium.</p>
-            </div>
-            <a href="#" class="btn btn-primary">Odblokuj pełny materiał</a>
-          </div>
-        </article>
-      </section>
-
-      <aside class="right-col section-stack">
-        <div class="panel">
-          <div class="panel-head">
-            <div>
-              <h2 class="panel-title">Wykresy</h2>
-              <p class="panel-sub">Kliknij, aby powiększyć</p>
-            </div>
-          </div>
-
-          <div class="panel-body section-stack">
-            <div class="chart-card">
-              <h3 class="chart-title">Pszenica</h3>
-              <button type="button" class="chart-open" data-title="Pszenica" data-src="assets/charts/pszenica.png">
-                <img src="assets/charts/pszenica.png" alt="Wykres pszenicy" class="chart-image">
-              </button>
-            </div>
-
-            <div class="chart-card">
-              <h3 class="chart-title">Kukurydza</h3>
-              <button type="button" class="chart-open" data-title="Kukurydza" data-src="assets/charts/kukurydza.png">
-                <img src="assets/charts/kukurydza.png" alt="Wykres kukurydzy" class="chart-image">
-              </button>
-            </div>
-
-            <div class="chart-card">
-              <h3 class="chart-title">Rzepak</h3>
-              <button type="button" class="chart-open" data-title="Rzepak" data-src="assets/charts/rzepak.png">
-                <img src="assets/charts/rzepak.png" alt="Wykres rzepaku" class="chart-image">
-              </button>
-            </div>
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">Ceny giełdowe</h2>
+            <p class="panel-sub">MATIF, CBOT i inne benchmarki</p>
           </div>
         </div>
-      </aside>
+        <div class="panel-body">
+          <div class="quote-table" id="cennikiGlobal"></div>
+        </div>
+      </div>
 
+      <div class="panel">
+        <div class="panel-head">
+          <div>
+            <h2 class="panel-title">FX</h2>
+            <p class="panel-sub">Najważniejsze kursy walutowe</p>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="quote-table" id="cennikiFx"></div>
+        </div>
+      </div>
     </section>
+
   </main>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
-    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
-      <div class="lightbox-top">
-        <h3 id="lightboxTitle">Wykres</h3>
-        <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Zamknij">×</button>
-      </div>
-      <div class="lightbox-body">
-        <img id="lightboxImage" src="" alt="Powiększony wykres">
-      </div>
-    </div>
-  </div>
-
-  <script src="data/komentarz.js"></script>
-  <script src="data/ceny.js"></script>
-  <script src="js/app.js"></script>
+  <script src="data/cenniki.js"></script>
+  <script src="js/cenniki.js"></script>
 </body>
 </html>
