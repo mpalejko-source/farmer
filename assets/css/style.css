@@ -604,6 +604,34 @@ img{max-width:100%;display:block}
   object-fit:contain;
 }
 
+/* VERTICAL SCROLL CHARTS */
+.chart-scroll-viewport{
+  height:980px;
+  overflow:hidden;
+  position:relative;
+}
+
+.chart-scroll-track{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  animation:chartsVerticalScroll 28s linear infinite;
+  will-change:transform;
+}
+
+.chart-scroll-viewport:hover .chart-scroll-track{
+  animation-play-state:paused;
+}
+
+@keyframes chartsVerticalScroll{
+  0%{
+    transform:translateY(0);
+  }
+  100%{
+    transform:translateY(-50%);
+  }
+}
+
 /* LIGHTBOX */
 .lightbox{
   position:fixed;
@@ -697,6 +725,15 @@ img{max-width:100%;display:block}
 
   .charts-grid{
     grid-template-columns:1fr;
+  }
+
+  .chart-scroll-viewport{
+    height:auto;
+    overflow:visible;
+  }
+
+  .chart-scroll-track{
+    animation:none;
   }
 }
 
