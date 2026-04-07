@@ -1,79 +1,176 @@
-window.ACE_CENY = {
-  dateTitle: "Ceny: 03.04.2026",
-  poland: [
-    {
-      name: "Pszenica konsumpcyjna",
-      market: "Polska",
-      value: "915 zł/t",
-      week: "+12 zł/t",
-      month: "+28 zł/t"
-    },
-    {
-      name: "Kukurydza",
-      market: "Polska",
-      value: "848 zł/t",
-      week: "-6 zł/t",
-      month: "+14 zł/t"
-    },
-    {
-      name: "Rzepak",
-      market: "Polska",
-      value: "2 164 zł/t",
-      week: "+35 zł/t",
-      month: "+92 zł/t"
-    },
-    {
-      name: "Śruta sojowa",
-      market: "PL port Gdynia",
-      value: "1 865 zł/t",
-      week: "-15 zł/t",
-      month: "-42 zł/t"
-    },
-    {
-      name: "Śruta rzepakowa",
-      market: "PL centralna Polska",
-      value: "1 185 zł/t",
-      week: "+5 zł/t",
-      month: "+24 zł/t"
+document.addEventListener("DOMContentLoaded", function () {
+  const komentarz = window.ACE_KOMENTARZ || {};
+  const ceny = window.ACE_CENY || {};
+
+  setText("heroTitle", komentarz.heroTitle);
+  setText("heroLead", komentarz.heroLead);
+  setText("metaDate", "Aktualizacja: " + (komentarz.aktualizacja || "--"));
+  setText("introTitle", komentarz.introTitle);
+  setText("introText", komentarz.introText);
+  setText("farmerConclusion", komentarz.farmerConclusion);
+  setText("pricesDateTitle", ceny.dateTitle || "Ceny: --");
+
+  renderComment("mainComment", komentarz.paragraphs || []);
+  renderQuotes("polandList", ceny.poland || []);
+  renderQuotes("globalList", ceny.global || []);
+  renderQuotes("fxList", ceny.fx || []);
+
+  initLightbox();
+});
+
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.textContent = value || "";
+  }
+}
+
+function renderComment(targetId, paragraphs) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  target.innerHTML = "";
+
+  if (!Array.isArray(paragraphs) || paragraphs.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "Brak komentarza na dziś.";
+    target.appendChild(p);
+    return;
+  }
+
+  paragraphs.forEach(function (text) {
+    const p = document.createElement("p");
+    p.textContent = text;
+    target.appendChild(p);
+  });
+}
+
+function renderQuotes(targetId, items) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+
+  target.innerHTML = "";
+
+  if (!Array.isArray(items) || items.length === 0) {
+    const row = document.createElement("div");
+    row.className = "quote-row";
+    row.innerHTML = `
+      <div class="quote-left">
+        <div class="quote-name">Brak danych</div>
+        <div class="quote-market">Uzupełnij plik data/ceny.js</div>
+      </div>
+    `;
+    target.appendChild(row);
+    return;
+  }
+
+  items.forEach(function (item) {
+    const row = document.createElement("div");
+    row.className = "quote-row";
+
+    row.innerHTML = `
+      <div class="quote-left">
+        <div class="quote-name">${escapeHtml(item.name || "")}</div>
+        <div class="quote-market">${escapeHtml(item.market || "")}</div>
+      </div>
+      <div class="quote-right">
+        <div class="quote-value">${escapeHtml(item.value || "")}</div>
+        <div class="quote-changes badges-two-line">
+          ${renderBadge("T", item.week)}
+          ${renderBadge("M", item.month)}
+        </div>
+      </div>
+    `;
+
+    target.appendChild(row);
+  });
+}
+
+function renderBadge(label, value) {
+  const cls = getChangeClass(value);
+  const arrow = getArrow(value);
+  const safeValue = escapeHtml(value || "-");
+
+  return `
+    <span class="delta-badge ${cls}" title="${safeValue}">
+      <span class="delta-arrow">${arrow}</span>
+      <span class="delta-label">${label}</span>
+    </span>
+  `;
+}
+
+function getChangeClass(value) {
+  if (!value) return "flat";
+
+  const text = String(value).trim();
+
+  if (text.startsWith("+")) return "up";
+  if (text.startsWith("-")) return "down";
+
+  return "flat";
+}
+
+function getArrow(value) {
+  if (!value) return "→";
+
+  const text = String(value).trim();
+
+  if (text.startsWith("+")) return "▲";
+  if (text.startsWith("-")) return "▼";
+
+  return "→";
+}
+
+function initLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+  const lightboxTitle = document.getElementById("lightboxTitle");
+  const lightboxClose = document.getElementById("lightboxClose");
+  const lightboxBackdrop = document.getElementById("lightboxBackdrop");
+  const buttons = document.querySelectorAll(".chart-open");
+
+  if (!lightbox || !lightboxImage || !lightboxTitle) return;
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const src = button.getAttribute("data-src");
+      const title = button.getAttribute("data-title") || "Wykres";
+
+      lightboxImage.src = src || "";
+      lightboxTitle.textContent = title;
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    });
+  });
+
+  function closeLightbox() {
+    lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightboxImage.src = "";
+    document.body.style.overflow = "";
+  }
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener("click", closeLightbox);
+  }
+
+  if (lightboxBackdrop) {
+    lightboxBackdrop.addEventListener("click", closeLightbox);
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+      closeLightbox();
     }
-  ],
-  global: [
-    {
-      name: "MATIF Pszenica",
-      market: "Euronext",
-      value: "228,50 €/t",
-      week: "+2,75 €/t",
-      month: "+7,00 €/t"
-    },
-    {
-      name: "MATIF Rzepak",
-      market: "Euronext",
-      value: "482,25 €/t",
-      week: "-4,00 €/t",
-      month: "+11,75 €/t"
-    },
-    {
-      name: "CBOT Kukurydza",
-      market: "Chicago",
-      value: "452,25 c/bu",
-      week: "+8,50 c/bu",
-      month: "+21,00 c/bu"
-    }
-  ],
-  fx: [
-    {
-      name: "EUR/PLN",
-      market: "FX",
-      value: "4,3120",
-      week: "+0,0240",
-      month: "+0,0510"
-    },
-    {
-      name: "USD/PLN",
-      market: "FX",
-      value: "3,9785",
-      week: "-0,0135",
-      month: "+0,0820"
-    }
-  ]
-};
+  });
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
